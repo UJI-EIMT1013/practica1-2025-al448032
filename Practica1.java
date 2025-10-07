@@ -1,5 +1,6 @@
 package practica1;
 
+import java.sql.Array;
 import java.util.*;
 
 public class Practica1 {
@@ -72,8 +73,29 @@ public class Practica1 {
 
     //EJERCICIO 3
     public static<T> Collection<Set<T>> divideInSets (Iterator<T> it) {
-        //TODO
-        return null;
+        Collection<Set<T>> resultado = new ArrayList<>();
+        while (it.hasNext()) {
+            T elemento = it.next();
+            boolean colocado = false;
+
+            //Miro si el elemento ya esta puesto en el conjunto y lo meto
+
+            for (Set<T> conjunto : resultado) {
+                if(!conjunto.contains(elemento)) {
+                    conjunto.add(elemento);
+                    colocado = true;
+                    break;
+                }
+            }
+            //Si no está puesto, creo uno nuevo y lo meto
+            if (!colocado) {
+                Set<T> nuevo = new HashSet<>();
+                nuevo.add(elemento);
+                resultado.add(nuevo);
+            }
+        }
+        return resultado;
+
     }
 
     //EJERCICIO 4
