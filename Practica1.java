@@ -6,8 +6,31 @@ public class Practica1 {
 
     //EJERCICIO 1
     public static Set<Integer> multiplos (Iterator<Integer> it) {
-        //TODO
-        return null;
+        //Me hago una lista para poder recorrerla con el iterador las veces que haga falta
+        Set<Integer> resultado = new HashSet<>();
+        List<Integer> numeros = new ArrayList<>();
+
+        while (it.hasNext()) {
+            numeros.add(it.next());
+        }
+        //Cojo cada numero y los comparo entre ellos para ver si uno es multiplo del otro
+        for (int i = 0; i < numeros.size(); i++) {
+            int primero = numeros.get(i);
+
+            for (int j = 0; j < numeros.size(); j++) {
+                int segundo = numeros.get(j);
+
+                //Me aseguro de que no tengo en cuenta los 0 y además que no esté comparando el mismo numero entre sí
+
+                if (primero != 0 && segundo != 0 && i != j) {
+                    if (primero % segundo == 0) {
+                        resultado.add(primero);
+                    }
+
+                }
+            }
+        }
+        return resultado;
     }
 
     //EJERCICIO2
