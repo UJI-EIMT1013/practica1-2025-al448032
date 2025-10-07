@@ -6,7 +6,7 @@ import java.util.*;
 public class Practica1 {
 
     //EJERCICIO 1
-    public static Set<Integer> multiplos (Iterator<Integer> it) {
+    public static Set<Integer> multiplos(Iterator<Integer> it) {
         //Me hago una lista para poder recorrerla con el iterador las veces que haga falta
         Set<Integer> resultado = new HashSet<>();
         List<Integer> numeros = new ArrayList<>();
@@ -35,7 +35,7 @@ public class Practica1 {
     }
 
     //EJERCICIO2
-    public static void separate (Set<Integer> cuadrados, Set<Integer> noCuadrados)  {
+    public static void separate(Set<Integer> cuadrados, Set<Integer> noCuadrados) {
         List<Integer> nuevo = new ArrayList<>();
         nuevo.addAll(cuadrados);
         nuevo.addAll(noCuadrados);
@@ -47,7 +47,7 @@ public class Practica1 {
             int numero1 = nuevo.get(i);
             boolean esCuadrado = false;
 
-            for (int j = 0; j < nuevo.size(); j++){
+            for (int j = 0; j < nuevo.size(); j++) {
                 int numero2 = nuevo.get(j);
 
                 if (i != j) {
@@ -59,8 +59,7 @@ public class Practica1 {
             }
             if (esCuadrado) {
                 provisionalCuadrados.add(numero1);
-            }
-            else {
+            } else {
                 provisionalNoCuadrados.add(numero1);
 
             }
@@ -72,7 +71,7 @@ public class Practica1 {
     }
 
     //EJERCICIO 3
-    public static<T> Collection<Set<T>> divideInSets (Iterator<T> it) {
+    public static <T> Collection<Set<T>> divideInSets(Iterator<T> it) {
         Collection<Set<T>> resultado = new ArrayList<>();
         while (it.hasNext()) {
             T elemento = it.next();
@@ -81,7 +80,7 @@ public class Practica1 {
             //Miro si el elemento ya esta puesto en el conjunto y lo meto
 
             for (Set<T> conjunto : resultado) {
-                if(!conjunto.contains(elemento)) {
+                if (!conjunto.contains(elemento)) {
                     conjunto.add(elemento);
                     colocado = true;
                     break;
@@ -99,11 +98,31 @@ public class Practica1 {
     }
 
     //EJERCICIO 4
-    public static<T> Collection<Set<T>> coverageSet2 (Set<T> u,ArrayList<Set<T>> col) {
-        //TODO
-        return null;
+    public static <T> Collection<Set<T>> coverageSet2(Set<T> u, ArrayList<Set<T>> col) {
+        Collection<Set<T>> resultado = new HashSet<>();
+        //Recorro todos los conjuntos de la lista y los comparo de dos en dos
+        for (int i = 0; i < col.size(); i++) {
+            Set<T> conjunto1 = col.get(i);
+
+            if (!u.equals(conjunto1)) {
+                for (int j = i + 1; j < col.size(); j++) {
+                    Set<T> conjunto2 = col.get(j);
+
+                    //Hago la union de los dos conjuntos y los devuelvo
+                    if (!u.equals(conjunto2)) {
+                        Set<T> union = new HashSet<>(conjunto1);
+                        union.addAll(conjunto2);
+
+                        if (union.equals(u)) {
+                            resultado.add(conjunto1);
+                            resultado.add(conjunto2);
+                            return resultado;
+                        }
+                    }
+                }
+            }
+        }
+
+        return resultado;
     }
-
-
-
 }
