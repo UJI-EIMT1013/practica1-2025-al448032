@@ -35,8 +35,39 @@ public class Practica1 {
 
     //EJERCICIO2
     public static void separate (Set<Integer> cuadrados, Set<Integer> noCuadrados)  {
-        //TODO
+        List<Integer> nuevo = new ArrayList<>();
+        nuevo.addAll(cuadrados);
+        nuevo.addAll(noCuadrados);
 
+        //Me hago unos conjuntos nuevos para meter provisionalmente los resultados
+        Set<Integer> provisionalCuadrados = new HashSet<>();
+        Set<Integer> provisionalNoCuadrados = new HashSet<>();
+        for (int i = 0; i < nuevo.size(); i++) {
+            int numero1 = nuevo.get(i);
+            boolean esCuadrado = false;
+
+            for (int j = 0; j < nuevo.size(); j++){
+                int numero2 = nuevo.get(j);
+
+                if (i != j) {
+                    if (numero2 * numero2 == numero1) {
+                        esCuadrado = true;
+                        break;
+                    }
+                }
+            }
+            if (esCuadrado) {
+                provisionalCuadrados.add(numero1);
+            }
+            else {
+                provisionalNoCuadrados.add(numero1);
+
+            }
+        }
+        cuadrados.clear();
+        cuadrados.addAll(provisionalCuadrados);
+        noCuadrados.clear();
+        noCuadrados.addAll(provisionalNoCuadrados);
     }
 
     //EJERCICIO 3
